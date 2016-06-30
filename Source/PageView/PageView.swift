@@ -14,7 +14,7 @@ class PageView: UIView {
     private var itemRadius: CGFloat         = 0
     private var selectedItemRadius: CGFloat = 0
     private var duration: Double            = 0.7
-    private var space: CGFloat              = 10// space between items
+    private var space: CGFloat              = 14// space between items
     
     var borderColor: UIColor = UIColor.whiteColor()
     var selectedBorderColor:UIColor = UIColor.whiteColor()
