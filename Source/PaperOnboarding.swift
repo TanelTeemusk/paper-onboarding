@@ -111,6 +111,8 @@ public class PaperOnboarding: UIView {
         self.pageBorderColor = pageBorderColor
         self.pageSelectedBorderColor = pageSelectedBorderColor
         self.itemsCount = itemCount
+        
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {

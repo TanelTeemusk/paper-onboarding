@@ -16,6 +16,7 @@ import UIKit
   public var imageView: UIImageView?
   public var titleLabel: UILabel?
   public var descriptionLabel: UILabel?
+    
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -143,6 +144,7 @@ private extension OnboardingContentViewItem {
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.textAlignment                             = .Center
       $0.textColor                                 = .whiteColor()
+      $0.numberOfLines                             = 0
     }
   }
 
