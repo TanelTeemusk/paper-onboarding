@@ -14,12 +14,12 @@ class PageContainer: UIView {
     let space: CGFloat // space between items
     var currentIndex = 0
     
-    fileprivate let itemRadius: CGFloat
-    fileprivate let selectedItemRadius: CGFloat
-    fileprivate let borderColor: UIColor
-    fileprivate let selectedBorderColor:UIColor
-    fileprivate let itemsCount: Int
-    fileprivate let animationKey = "animationKey"
+    let itemRadius: CGFloat
+    let selectedItemRadius: CGFloat
+    let borderColor: UIColor
+    let selectedBorderColor:UIColor
+    let itemsCount: Int
+    let animationKey = "animationKey"
     
     init(radius: CGFloat, selectedRadius: CGFloat, space: CGFloat, itemsCount: Int, borderColor:UIColor, selectedBorderColor:UIColor) {
         
@@ -27,7 +27,7 @@ class PageContainer: UIView {
         self.space              = space
         self.itemRadius         = radius
         self.selectedItemRadius = selectedRadius
-        self.borderColor = borderColor
+        self.borderColor        = borderColor
         self.selectedBorderColor = selectedBorderColor
         super.init(frame: CGRect.zero)
         items = createItems(itemsCount, radius: radius, selectedRadius: selectedRadius)
@@ -121,7 +121,7 @@ extension PageContainer {
     }
     
     fileprivate func addConstraintsToView(_ item: UIView, leftItem: UIView, radius: CGFloat) {
-        (self, item) >>>- { $0.attribute = .centerY }
+        (self, item) >>>- { $0.attribute = .centerY; return }
         
         (self, item, leftItem) >>>- {
             $0.attribute       = .leading

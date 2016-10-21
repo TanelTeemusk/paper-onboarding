@@ -124,19 +124,21 @@ private extension OnboardingContentViewItem {
     
     // add constraints
     label >>>- {
-      $0.attribute = .height
-      $0.constant  = 10000
-      $0.relation  = .lessThanOrEqual
+        $0.attribute = .height
+        $0.constant  = 10000
+        $0.relation  = .lessThanOrEqual
+        return
     }
   
     for (attribute, constant) in [(NSLayoutAttribute.leading, 30), (NSLayoutAttribute.trailing, -30)] {
       (onView, label) >>>- {
         $0.attribute = attribute
         $0.constant  = CGFloat(constant)
+        return
       }
     }
-      (onView, label) >>>- { $0.attribute = .centerX }
-      bottomConstraint = (onView, label) >>>- { $0.attribute = .bottom }
+    (onView, label) >>>- { $0.attribute = .centerX; return }
+    bottomConstraint = (onView, label) >>>- { $0.attribute = .bottom; return }
     
     return label
   }
@@ -164,6 +166,7 @@ private extension OnboardingContentViewItem {
       imageView >>>- {
         $0.attribute = attribute
         $0.constant  = 188
+        return
       }
     }
     

@@ -123,11 +123,12 @@ extension PageView {
             (self, container) >>>- { $0.attribute = attribute; return }
         }
         
-        containerX = (self, container) >>>- { $0.attribute = .centerX }
+        containerX = (self, container) >>>- { $0.attribute = .centerX; return }
         
         container >>>- {
             $0.attribute = .width
             $0.constant  = selectedItemRadius * 2 + CGFloat(itemsCount - 1) * (itemRadius * 2) + space * CGFloat(itemsCount - 1)
+            return
         }
         
         return container
