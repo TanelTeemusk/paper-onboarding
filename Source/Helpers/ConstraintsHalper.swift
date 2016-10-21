@@ -9,62 +9,69 @@
 import UIKit
 
 struct ConstraintInfo {
-  var attribute: NSLayoutAttribute = .Left
-  var secondAttribute: NSLayoutAttribute = .NotAnAttribute
-  var constant: CGFloat = 0
-  var identifier: String?
-  var relation: NSLayoutRelation = .Equal
+    var attribute: NSLayoutAttribute = .left
+    var secondAttribute: NSLayoutAttribute = .notAnAttribute
+    var constant: CGFloat = 0
+    var identifier: String?
+    var relation: NSLayoutRelation = .equal
 }
 
-infix operator >>>- { associativity left precedence 150 }
-
-func >>>- <T: UIView> (left: (T, T), @noescape block: (inout ConstraintInfo) -> ()) -> NSLayoutConstraint {
-  var info = ConstraintInfo()
-  block(&info)
-  info.secondAttribute = info.secondAttribute == .NotAnAttribute ? info.attribute : info.secondAttribute
-  
-  let constraint = NSLayoutConstraint(item: left.1,
-                                      attribute: info.attribute,
-                                      relatedBy: info.relation,
-                                      toItem: left.0,
-                                      attribute: info.secondAttribute,
-                                      multiplier: 1,
-                                      constant: info.constant)
-  constraint.identifier = info.identifier
-  left.0.addConstraint(constraint)
-  return constraint
+precedencegroup constOp {
+    associativity: left
+    higherThan: AssignmentPrecedence
 }
 
-func >>>- <T: UIView> (left: T, @noescape block: (inout ConstraintInfo) -> ()) -> NSLayoutConstraint {
-  var info = ConstraintInfo()
-  block(&info)
-  
-  let constraint = NSLayoutConstraint(item: left,
-                                      attribute: info.attribute,
-                                      relatedBy: info.relation,
-                                      toItem: nil,
-                                      attribute: info.attribute,
-                                      multiplier: 1,
-                                      constant: info.constant)
-  constraint.identifier = info.identifier
-  left.addConstraint(constraint)
-  return constraint
+infix operator >>>- : constOp
+
+@discardableResult
+func >>>- <T: UIView> (left: (T, T), block: (inout ConstraintInfo) -> Void) -> NSLayoutConstraint {
+    var info = ConstraintInfo()
+    block(&info)
+    info.secondAttribute = info.secondAttribute == .notAnAttribute ? info.attribute : info.secondAttribute
+    
+    let constraint = NSLayoutConstraint(item: left.1,
+                                        attribute: info.attribute,
+                                        relatedBy: info.relation,
+                                        toItem: left.0,
+                                        attribute: info.secondAttribute,
+                                        multiplier: 1,
+                                        constant: info.constant)
+    constraint.identifier = info.identifier
+    left.0.addConstraint(constraint)
+    return constraint
 }
 
-func >>>- <T: UIView> (left: (T, T, T), @noescape block: (inout ConstraintInfo) -> ()) -> NSLayoutConstraint {
-  var info = ConstraintInfo()
-  block(&info)
-  info.secondAttribute = info.secondAttribute == .NotAnAttribute ? info.attribute : info.secondAttribute
-  
-  let constraint = NSLayoutConstraint(item: left.1,
-                                      attribute: info.attribute,
-                                      relatedBy: info.relation,
-                                      toItem: left.2,
-                                      attribute: info.secondAttribute,
-                                      multiplier: 1,
-                                      constant: info.constant)
-  constraint.identifier = info.identifier
-  left.0.addConstraint(constraint)
-  return constraint
+@discardableResult
+func >>>- <T: UIView> (left: T, block: (inout ConstraintInfo) -> Void) -> NSLayoutConstraint {
+    var info = ConstraintInfo()
+    block(&info)
+    
+    let constraint = NSLayoutConstraint(item: left,
+                                        attribute: info.attribute,
+                                        relatedBy: info.relation,
+                                        toItem: nil,
+                                        attribute: info.attribute,
+                                        multiplier: 1,
+                                        constant: info.constant)
+    constraint.identifier = info.identifier
+    left.addConstraint(constraint)
+    return constraint
 }
 
+@discardableResult
+func >>>- <T: UIView> (left: (T, T, T), block: (inout ConstraintInfo) -> Void) -> NSLayoutConstraint {
+    var info = ConstraintInfo()
+    block(&info)
+    info.secondAttribute = info.secondAttribute == .notAnAttribute ? info.attribute : info.secondAttribute
+    
+    let constraint = NSLayoutConstraint(item: left.1,
+                                        attribute: info.attribute,
+                                        relatedBy: info.relation,
+                                        toItem: left.2,
+                                        attribute: info.secondAttribute,
+                                        multiplier: 1,
+                                        constant: info.constant)
+    constraint.identifier = info.identifier
+    left.0.addConstraint(constraint)
+    return constraint
+}

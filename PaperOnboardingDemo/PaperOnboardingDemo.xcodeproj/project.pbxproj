@@ -395,6 +395,7 @@
 				TargetAttributes = {
 					845C48BE1CFDB2F7002BE949 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					84A7739F1CCE545200EF4EB0 = {
 						CreatedOnToolsVersion = 7.3;
@@ -585,6 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.PaperOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -607,6 +609,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.PaperOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
